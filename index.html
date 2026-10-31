@@ -1,147 +1,146 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>লতিফিয়া সংগঠন মীরের গাঁও</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@700;900&family=Noto+Serif+Bengali:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@900&family=Hind+Siliguri:wght@700;900&display=swap" rel="stylesheet">
 <style>
-*{font-family:'Hind Siliguri',sans-serif}
-.title-font{font-family:'Noto Serif Bengali',serif;}
-.lighting{
-  background: linear-gradient(90deg, #fff 0%, #facc15 25%, #ffffff 50%, #facc15 75%, #fff 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 2.5s linear infinite;
-  filter: drop-shadow(0 0 8px gold);
-}
-@keyframes shine{to{background-position: 200% center;}}
-.glass{backdrop-filter: blur(18px); background: rgba(255,255,255,0.85);}
+*{font-family:'Hind Siliguri',sans-serif} .title{font-family:'Noto Serif Bengali',serif}
+.lighting{background:linear-gradient(90deg,#fff 0%,gold 25%,#fff 50%,gold 75%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shine 2s linear infinite;filter:drop-shadow(0 0 10px gold)}@keyframes shine{to{background-position:200% center}}
+.glass{backdrop-filter:blur(16px);background:rgba(255,255,255,0.92)}
 </style>
 </head>
-<body class="bg-[#fefce8]">
-<div class="max-w-[520px] mx-auto bg-white min-h-screen shadow-2xl relative overflow-hidden">
+<body class="bg-amber-50">
+<div class="max-w-[520px] mx-auto bg-white min-h-screen shadow-2xl relative">
 
-<!-- HEADER WITH BG IMAGE -->
-<div id="headerBox" class="relative h-[340px] rounded-b-[40px] overflow-hidden shadow-xl" style="background: url('https://images.unsplash.com/photo-1587613865763-4b8b0d19e8ab') center/cover;">
-<div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-emerald-900/80"></div>
+<div id="headerBox" class="relative h-[385px] rounded-b-[40px] overflow-hidden shadow" style="background:url('https://images.unsplash.com/photo-1591604466107-ec97de577aff') center/cover;">
+<div class="absolute inset-0 bg-gradient-to-b from-black/30 to-emerald-900/70"></div>
 
-<!-- TOP BAR -->
 <div class="absolute top-0 w-full p-4 flex justify-between items-center z-20">
-<label class="w-9 h-9 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-white cursor-pointer">🖼️<input id="bgInput" type="file" accept="image/*" class="hidden"></label>
-<button id="menuBtn" class="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center font-black text-xl shadow">☰</button>
+<div class="flex items-center gap-2">
+<div id="logoBox" class="w-[52px] h-[52px] rounded-full bg-white shadow-xl border-2 border-yellow-400 overflow-hidden flex items-center justify-center"><img id="logoImg" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="w-full h-full object-cover"></div>
+<label class="w-9 h-9 rounded-full bg-white shadow flex items-center justify-center cursor-pointer text-[16px]" title="লোগো চেঞ্জ">⚙️<input id="logoInput" type="file" accept="image/*" class="hidden"></label>
+<label class="w-9 h-9 rounded-full bg-white/90 shadow flex items-center justify-center cursor-pointer" title="ব্যাকগ্রাউন্ড চেঞ্জ">🖼️<input id="bgInput" type="file" accept="image/*" class="hidden"></label>
+</div>
+<button id="menuBtn" class="w-11 h-11 rounded-full bg-white flex items-center justify-center font-black text-xl shadow">☰</button>
 </div>
 
-<!-- TITLE -->
 <div class="absolute bottom-0 w-full p-6 text-center z-10">
-<h1 class="title-font text-white text-[32px] leading-[38px] font-black drop-shadow-[0_3px_10px_rgba(0,0,0,0.8)]">লতিফিয়া সংগঠন<br>মীরের গাঁও</h1>
-<p class="lighting mt-2 font-black text-[14px] tracking-[3px]">✨ প্রতিষ্ঠিত: ২০২৪ ইং ✨</p>
-<div class="mt-3 inline-block bg-white/20 border border-white/30 backdrop-blur px-4 py-1.5 rounded-full text-white text-[10px]">আলোয় আলোকিত সমাজ গড়ি</div>
+<h1 class="title text-white text-[35px] leading-[38px] font-black drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">লতিফিয়া সংগঠন<br>মীরের গাঁও</h1>
+<p class="lighting mt-2 font-black text-[15px] tracking-[4px]">প্রতিষ্ঠিত: ২০২৪ ইং</p>
+<p class="mt-2 text-[11px] text-white/90 bg-white/15 border border-white/20 inline-block px-4 py-1.5 rounded-full backdrop-blur">✨ আলোয় আলোকিত সমাজ গড়ি ✨</p>
 </div>
 </div>
 
-<!-- MENU DRAWER -->
-<div id="drawer" class="fixed inset-0 z-[100] hidden">
-<div class="absolute inset-0 bg-black/60" onclick="closeDrawer()"></div>
-<div class="absolute right-0 top-0 h-full w-[300px] bg-white rounded-l-[28px] p-6 shadow-2xl">
-<div class="flex justify-between items-center"><p class="font-black text-[18px]">মেনু</p><button onclick="closeDrawer()" class="w-9 h-9 bg-zinc-100 rounded-full">✕</button></div>
+<div id="drawer" class="fixed inset-0 z-[100] hidden"><div class="absolute inset-0 bg-black/60" onclick="closeDrawer()"></div>
+<div class="absolute right-0 top-0 h-full w-[300px] bg-white rounded-l-[32px] p-6 shadow-2xl">
+<div class="flex justify-between"><p class="font-black text-[18px]">মেনু</p><button onclick="closeDrawer()" class="w-9 h-9 bg-zinc-100 rounded-full">✕</button></div>
 <div class="mt-8 space-y-3">
-<button onclick="openPage('about')" class="w-full text-left bg-emerald-50 border border-emerald-100 p-4 rounded-[16px] font-bold">📜 সংগঠন পরিচিতি</button>
-<button onclick="openPage('members')" class="w-full text-left bg-white border p-4 rounded-[16px] font-bold">👥 সদস্য তালিকা</button>
-<button onclick="openPage('hisab')" class="w-full text-left bg-white border p-4 rounded-[16px] font-bold">💰 হিসাব তালিকা</button>
-<button onclick="openPage('contact')" class="w-full text-left bg-white border p-4 rounded-[16px] font-bold">📞 যোগাযোগ</button>
+<a href="about.html" class="block bg-emerald-50 border border-emerald-200 p-4 rounded-[16px] font-bold">📜 সংগঠন পরিচিতি</a>
+<a href="members.html" class="block border p-4 rounded-[16px] font-bold">👥 সদস্য তালিকা</a>
+<a href="hisab.html" class="block border p-4 rounded-[16px] font-bold">💰 হিসাব তালিকা</a>
+<a href="contact.html" class="block border p-4 rounded-[16px] font-bold">📞 যোগাযোগ</a>
 </div>
-<p class="mt-10 text-center text-[10px] text-zinc-400">latifia.mirergaon@gmail.com</p>
-</div>
-</div>
+<div class="mt-10 p-4 bg-zinc-50 rounded-[16px] text-[11px]">এই মেনুগুলো আলাদা ফাইল হিসেবে পরে বানাবো।</div>
+</div></div>
 
-<!-- POST CREATE -->
 <div class="p-4">
-<div class="glass border rounded-[24px] p-4 shadow-lg">
+<div class="glass border rounded-[24px] p-4 shadow-xl">
 <div class="flex justify-between items-center mb-3">
-<p class="font-black text-[14px]">📝 নতুন পোস্ট</p>
-<div class="flex gap-2">
-<input id="searchInput" placeholder="মাস/বছর লিখুন (যেমন: জানুয়ারি 2024)" class="bg-zinc-50 border rounded-full px-3 py-1.5 text-[10px] w-[160px] outline-none">
+<p class="font-black text-[14px]">📝 নতুন পোস্ট করুন</p>
+<div class="flex gap-1.5 items-center">
+<input id="searchInput" placeholder="জানুয়ারি 2024 লিখে সার্চ" class="bg-zinc-50 border rounded-full px-3 py-2 text-[10px] w-[140px] outline-none">
 <button onclick="searchPost()" class="w-8 h-8 bg-zinc-900 text-white rounded-full">🔍</button>
 </div>
 </div>
-<input id="postTitle" placeholder="পোস্টের টাইটেল লিখুন..." class="w-full border-2 border-zinc-100 rounded-[14px] p-3 text-[13px] outline-none focus:border-emerald-500">
+<input id="postTitle" placeholder="পোস্টের টাইটেল..." class="w-full border-2 border-zinc-100 rounded-[14px] p-3 text-[13px] outline-none focus:border-emerald-500">
 <textarea id="postDesc" placeholder="বিস্তারিত লিখুন..." class="mt-2 w-full border-2 border-zinc-100 rounded-[14px] p-3 text-[12px] h-[70px] outline-none"></textarea>
 <div class="mt-3 flex gap-2">
-<label class="flex-1 bg-zinc-50 border-2 border-dashed rounded-[14px] p-3 text-center text-[11px] cursor-pointer">📷 ছবি যোগ করুন<input id="postImage" type="file" accept="image/*" class="hidden"></label>
-<button onclick="createPost()" class="bg-emerald-600 text-white px-8 rounded-[14px] font-black text-[13px]">পোস্ট</button>
+<label class="flex-1 bg-zinc-50 border-2 border-dashed border-emerald-300 rounded-[14px] p-3 text-center text-[11px] font-bold cursor-pointer">🖼️ ছবি এড করুন<br><span id="fileName" class="text-[9px] text-zinc-400 font-normal">10-20 MB পর্যন্ত সাপোর্ট</span><input id="postImage" type="file" accept="image/*" class="hidden"></label>
+<button onclick="createPost()" id="postBtn" class="bg-emerald-600 text-white px-8 rounded-[14px] font-black text-[13px] shadow">পোস্ট</button>
 </div>
 </div>
 
-<!-- POST LIST -->
-<div id="postList" class="mt-6 space-y-4 pb-20"></div>
+<div id="postList" class="mt-6 space-y-4 pb-24"><p class="text-center text-zinc-400 text-[12px] py-10 animate-pulse">পোস্ট লোড হচ্ছে...</p></div>
 </div>
-
-<!-- PAGES MODAL -->
-<div id="pageModal" class="fixed inset-0 z-[200] hidden bg-white overflow-auto"><div class="max-w-[520px] mx-auto min-h-screen"><div class="sticky top-0 bg-white p-4 border-b flex justify-between"><p id="pageTitle" class="font-black"></p><button onclick="closePage()" class="w-9 h-9 bg-zinc-100 rounded-full">✕</button></div><div id="pageContent" class="p-6 text-[13px] leading-7"></div></div></div>
-
 </div>
 
 <script>
-let posts = JSON.parse(localStorage.getItem('latifia_posts')||'[]');
-const bgInput=document.getElementById('bgInput');
-bgInput.addEventListener('change', e=>{ const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=ev=>{ document.getElementById('headerBox').style.backgroundImage=`url('${ev.target.result}')`; localStorage.setItem('latifia_bg',ev.target.result); }; r.readAsDataURL(f); });
-if(localStorage.getItem('latifia_bg')){ document.getElementById('headerBox').style.backgroundImage=`url('${localStorage.getItem('latifia_bg')}')`; }
+const API_URL = "https://script.google.com/macros/s/AKfycbyPySQsAAFWIjLpijiZeWjbiQYv8u5fcCzXKTDKCRbkiXtL84ojtTSv0JKUAfUzShNR/exec";
+let allPosts=[];
 
-function createPost(){
-  const title=document.getElementById('postTitle').value.trim();
-  const desc=document.getElementById('postDesc').value.trim();
-  const file=document.getElementById('postImage').files[0];
-  if(!title){alert('টাইটেল দিন');return;}
-  const date=new Date();
-  const dateStr=date.toLocaleDateString('bn-BD',{day:'numeric',month:'long',year:'numeric'});
-  const save=(img)=>{
-    posts.unshift({id:Date.now(),title,desc,img,dateStr,month:date.getMonth(),year:date.getFullYear(),time:date.toISOString()});
-    localStorage.setItem('latifia_posts',JSON.stringify(posts));
-    document.getElementById('postTitle').value=''; document.getElementById('postDesc').value=''; document.getElementById('postImage').value='';
-    renderPosts();
-  };
-  if(file){ const rd=new FileReader(); rd.onload=e=>save(e.target.result); rd.readAsDataURL(file); } else save('');
+document.getElementById('bgInput').addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=ev=>{ document.getElementById('headerBox').style.backgroundImage=`url('${ev.target.result}')`; localStorage.setItem('latifia_bg',ev.target.result); }; r.readAsDataURL(f); });
+if(localStorage.getItem('latifia_bg')) document.getElementById('headerBox').style.backgroundImage=`url('${localStorage.getItem('latifia_bg')}')`;
+
+document.getElementById('logoInput').addEventListener('change', async e=>{
+  const f=e.target.files[0]; if(!f) return;
+  if(f.size>20*1024*1024){alert('20MB এর বেশি ফাইল নেওয়া যাবে না'); return;}
+  const reader=new FileReader();
+  reader.onload=async ev=>{
+    document.getElementById('logoImg').src=ev.target.result;
+    try{
+      const res=await fetch(API_URL,{method:'POST', body:JSON.stringify({action:"saveLogo", logoBase64:ev.target.result, mimeType:f.type})});
+      alert('✅ লোগো সেট হয়েছে, সবার কাছে চলে গেছে');
+    }catch(err){ alert('লোগো লোকাল সেট হয়েছে, নেট চেক করুন'); }
+  }; reader.readAsDataURL(f);
+});
+
+document.getElementById('postImage').addEventListener('change', e=>{
+  const f=e.target.files[0]; if(!f) return;
+  if(f.size>20*1024*1024){alert('ছবি 20MB এর বেশি!'); e.target.value=''; return;}
+  document.getElementById('fileName').innerText = f.name + ' ('+(f.size/1024/1024).toFixed(2)+' MB) ✅';
+});
+
+async function loadPosts(){
+  try{
+    const r=await fetch(`${API_URL}?action=getPosts`);
+    allPosts=await r.json();
+    render(allPosts);
+    const lr=await fetch(`${API_URL}?action=getLogo`);
+    const ld=await lr.json();
+    if(ld.logo) document.getElementById('logoImg').src=ld.logo;
+  }catch(e){ document.getElementById('postList').innerHTML='<p class="text-center text-red-400 text-[12px] py-10">Google Sheet এখনো কানেক্ট হয়নি, Sheet এ Posts ও Config নামে 2টা ট্যাব বানান</p>'; }
 }
-function renderPosts(list=posts){
-  const box=document.getElementById('postList');
-  if(list.length==0){box.innerHTML='<p class="text-center text-zinc-400 text-[12px] py-10">কোনো পোস্ট নেই</p>';return;}
-  box.innerHTML=list.map(p=>`
+function render(list){
+  if(!list || list.length==0){document.getElementById('postList').innerHTML='<p class="text-center text-zinc-400 text-[12px] py-10">এখনো কোনো পোস্ট নেই</p>';return;}
+  document.getElementById('postList').innerHTML=list.map(p=>`
     <div class="bg-white border rounded-[22px] overflow-hidden shadow-sm">
-      ${p.img?`<img src="${p.img}" class="w-full h-[220px] object-cover">`:''}
+      ${p.img?`<img src="${p.img}" class="w-full h-[280px] object-cover">`:''}
       <div class="p-4">
-        <p class="text-[10px] bg-emerald-50 text-emerald-700 inline-block px-3 py-1 rounded-full font-bold">📅 ${p.dateStr}</p>
-        <p class="font-black text-[16px] mt-2">${p.title}</p>
+        <p class="text-[10px] bg-emerald-50 text-emerald-700 inline-block px-3 py-1 rounded-full font-bold">📅 ${p.dateStr||new Date(p.time).toLocaleDateString('bn-BD')}</p>
+        <p class="font-black text-[17px] mt-2">${p.title}</p>
         <p class="text-[12px] text-zinc-600 mt-1 leading-6">${p.desc||''}</p>
       </div>
     </div>
   `).join('');
 }
+async function createPost(){
+  const title=document.getElementById('postTitle').value.trim();
+  const desc=document.getElementById('postDesc').value.trim();
+  const file=document.getElementById('postImage').files[0];
+  if(!title){alert('টাইটেল দিন');return;}
+  const btn=document.getElementById('postBtn'); btn.innerText='⏳ আপলোড...'; btn.disabled=true;
+  const dateStr=new Date().toLocaleDateString('bn-BD',{day:'numeric',month:'long',year:'numeric'});
+  const toBase64 = f => new Promise(res=>{ if(!f) res(''); else { const r=new FileReader(); r.onload=e=>res(e.target.result); r.readAsDataURL(f); }});
+  const base64 = await toBase64(file);
+  try{
+    await fetch(API_URL,{method:'POST', body:JSON.stringify({action:"addPost", title, desc, dateStr, imageBase64:base64, mimeType:file?file.type:'', fileName:file?file.name:''})});
+    alert('✅ পোস্ট সফলভাবে সবার কাছে চলে গেছে');
+    document.getElementById('postTitle').value=''; document.getElementById('postDesc').value=''; document.getElementById('postImage').value=''; document.getElementById('fileName').innerText='10-20 MB পর্যন্ত সাপোর্ট';
+    loadPosts();
+  }catch(e){alert('Error: '+e.message);}
+  btn.innerText='পোস্ট'; btn.disabled=false;
+}
 function searchPost(){
   const q=document.getElementById('searchInput').value.toLowerCase();
-  if(!q){renderPosts();return;}
-  const filtered=posts.filter(p=> p.dateStr.toLowerCase().includes(q) || p.title.toLowerCase().includes(q) || p.year.toString().includes(q));
-  renderPosts(filtered);
-  if(filtered.length>0) window.scrollTo({top:400,behavior:'smooth'});
+  if(!q){render(allPosts);return;}
+  const f=allPosts.filter(p=> (p.dateStr&&p.dateStr.toLowerCase().includes(q)) || p.title.toLowerCase().includes(q) || (p.year&&p.year.toString().includes(q)) || p.desc.toLowerCase().includes(q));
+  render(f);
 }
-
 document.getElementById('menuBtn').onclick=()=>document.getElementById('drawer').classList.remove('hidden');
 function closeDrawer(){document.getElementById('drawer').classList.add('hidden');}
-function openPage(type){
-  closeDrawer();
-  const modal=document.getElementById('pageModal');
-  const title=document.getElementById('pageTitle');
-  const content=document.getElementById('pageContent');
-  modal.classList.remove('hidden');
-  if(type=='about'){title.innerText='📜 সংগঠন পরিচিতি'; content.innerHTML=`<b>লতিফিয়া সংগঠন মীরের গাঁও</b> ২০২৪ সালে প্রতিষ্ঠিত একটি অরাজনৈতিক ইসলামি ও সামাজিক সংগঠন।<br><br>🎯 <b>লক্ষ্য:</b><br>• যুব সমাজকে নামাজের প্রতি আগ্রহী করা<br>• সমাজ সেবা ও দরিদ্রদের সহায়তা<br>• ইসলামি শিক্ষা প্রচার<br><br>আমরা বিশ্বাস করি আলোয় আলোকিত সমাজ গড়তে শিক্ষা ও নামাজই প্রধান হাতিয়ার।`}
-  if(type=='members'){title.innerText='👥 সদস্য তালিকা'; content.innerHTML=`<div class="space-y-2"><div class="border p-3 rounded-xl">1. সভাপতি - [নাম]</div><div class="border p-3 rounded-xl">2. সেক্রেটারি - [নাম]</div><div class="border p-3 rounded-xl">3. ক্যাশিয়ার - [নাম]</div></div><p class="mt-4 text-[11px] text-zinc-500">এখানে আপনি নাম এডিট করতে পারবেন</p>`}
-  if(type=='hisab'){title.innerText='💰 হিসাব তালিকা'; content.innerHTML=`<table class="w-full border text-[11px]"><tr class="bg-zinc-900 text-white"><th class="p-2">তারিখ</th><th class="p-2">বিবরণ</th><th class="p-2">টাকা</th></tr><tr><td class="p-2 border">01/01/2024</td><td class="p-2 border">চাঁদা</td><td class="p-2 border">5000</td></tr></table>`}
-  if(type=='contact'){title.innerText='📞 যোগাযোগ'; content.innerHTML=`<p>📍 মীরের গাঁও, সিলেট</p><p>📧 latifia.mirergaon@gmail.com</p><p>📞 01XXX-XXXXXX</p><br><a href="mailto:latifia.mirergaon@gmail.com" class="bg-emerald-600 text-white px-6 py-3 rounded-full inline-block font-black">মেইল করুন</a>`}
-}
-function closePage(){document.getElementById('pageModal').classList.add('hidden');}
-renderPosts();
+loadPosts();
 </script>
 </body>
 </html>
