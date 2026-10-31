@@ -4,122 +4,100 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>লতিফিয়া সংগঠন মীরের গাঁও</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@900&family=Hind+Siliguri:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@900&family=Hind+Siliguri:wght@900&display=swap" rel="stylesheet">
 <style>
-*{font-family:'Hind Siliguri',sans-serif} .title{font-family:'Noto Serif Bengali',serif}
-.lighting{background:linear-gradient(90deg,#fff 0%,gold 25%,#fff 50%,gold 75%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shine 2s linear infinite;filter:drop-shadow(0 0 10px gold)}@keyframes shine{to{background-position:200% center}}
-.glass{backdrop-filter:blur(16px);background:rgba(255,255,255,0.92)}
+*{font-family:'Hind Siliguri'} .title{font-family:'Noto Serif Bengali'} 
+.lighting{background:linear-gradient(90deg,#fff,gold,#fff,gold,#fff);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:sh 2s linear infinite;filter:drop-shadow(0 0 8px gold)}@keyframes sh{to{background-position:200%}}
 </style>
 </head>
-<body class="bg-amber-50">
-<div class="max-w-[520px] mx-auto bg-white min-h-screen shadow-2xl relative">
+<body class="bg-[#fffbeb]">
+<div class="max-w-[520px] mx-auto bg-white min-h-screen shadow-2xl">
 
-<!-- HEADER - BG will be loaded from GitHub -->
-<div id="headerBox" class="relative h-[385px] rounded-b-[40px] overflow-hidden shadow" style="background:url('./bg.jpg') center/cover, url('https://images.unsplash.com/photo-1591604466107-ec97de577aff') center/cover;">
-<div class="absolute inset-0 bg-gradient-to-b from-black/20 to-emerald-900/70"></div>
-
-<div class="absolute top-0 w-full p-4 flex justify-between items-center z-20">
-<!-- LOGO will be loaded from GitHub -->
-<div id="logoBox" class="w-[56px] h-[56px] rounded-full bg-white shadow-xl border-2 border-yellow-400 overflow-hidden flex items-center justify-center">
-<img id="logoImg" src="./logo.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'" class="w-full h-full object-cover">
+<div id="headerBox" class="relative h-[385px] rounded-b-[40px] overflow-hidden" style="background: url('./bg.jpg'), url('./bg.png'), url('https://images.unsplash.com/photo-1587613865763-4b8b0d19e8ab') center/cover;">
+<div class="absolute inset-0 bg-black/40"></div>
+<div class="absolute top-0 w-full p-4 flex justify-between z-20">
+<div class="w-[60px] h-[60px] bg-white rounded-full border-2 border-yellow-400 overflow-hidden shadow-xl"><img src="./logo.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'" class="w-full h-full object-cover"></div>
+<button id="menuBtn" class="w-11 h-11 bg-white rounded-full font-black text-xl shadow">☰</button>
 </div>
-<button id="menuBtn" class="w-11 h-11 rounded-full bg-white flex items-center justify-center font-black text-xl shadow">☰</button>
-</div>
-
 <div class="absolute bottom-0 w-full p-6 text-center z-10">
-<h1 class="title text-white text-[35px] leading-[38px] font-black drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">লতিফিয়া সংগঠন<br>মীরের গাঁও</h1>
-<p class="lighting mt-2 font-black text-[15px] tracking-[4px]">প্রতিষ্ঠিত: ২০২৪ ইং</p>
-<p class="mt-2 text-[11px] text-white/90 bg-white/15 border border-white/20 inline-block px-4 py-1.5 rounded-full backdrop-blur">✨ আলোয় আলোকিত সমাজ গড়ি ✨</p>
+<h1 class="title text-white text-[35px] leading-[36px] font-black">লতিফিয়া সংগঠন<br>মীরের গাঁও</h1>
+<p class="lighting mt-2 font-black tracking-[4px] text-[14px]">প্রতিষ্ঠিত: ২০২৪ ইং</p>
 </div>
 </div>
 
-<!-- DRAWER -->
-<div id="drawer" class="fixed inset-0 z-[100] hidden"><div class="absolute inset-0 bg-black/60" onclick="closeDrawer()"></div>
-<div class="absolute right-0 top-0 h-full w-[300px] bg-white rounded-l-[32px] p-6 shadow-2xl">
-<div class="flex justify-between"><p class="font-black text-[18px]">মেনু</p><button onclick="closeDrawer()" class="w-9 h-9 bg-zinc-100 rounded-full">✕</button></div>
-<div class="mt-8 space-y-3">
-<a href="about.html" class="block bg-emerald-50 border border-emerald-200 p-4 rounded-[16px] font-bold">📜 সংগঠন পরিচিতি</a>
-<a href="members.html" class="block border p-4 rounded-[16px] font-bold">👥 সদস্য তালিকা</a>
-<a href="hisab.html" class="block border p-4 rounded-[16px] font-bold">💰 হিসাব তালিকা</a>
-<a href="contact.html" class="block border p-4 rounded-[16px] font-bold">📞 যোগাযোগ</a>
-</div>
-</div></div>
+<div id="drawer" class="fixed inset-0 z-[100] hidden"><div class="absolute inset-0 bg-black/60" onclick="closeDrawer()"></div><div class="absolute right-0 top-0 h-full w-[300px] bg-white rounded-l-[30px] p-6"><div class="flex justify-between"><p class="font-black">মেনু</p><button onclick="closeDrawer()" class="w-8 h-8 bg-zinc-100 rounded-full">✕</button></div><div class="mt-8 space-y-3"><a href="./about.html" class="block p-4 border rounded-xl font-bold">📜 সংগঠন পরিচিতি</a><a href="./members.html" class="block p-4 border rounded-xl font-bold">👥 সদস্য তালিকা</a><a href="./hisab.html" class="block p-4 border rounded-xl font-bold">💰 হিসাব তালিকা</a><a href="./contact.html" class="block p-4 border rounded-xl font-bold">📞 যোগাযোগ</a></div></div></div>
 
-<!-- POST BOX -->
 <div class="p-4">
-<div class="glass border rounded-[24px] p-4 shadow-xl">
-<div class="flex justify-between items-center mb-3">
-<p class="font-black text-[14px]">📝 নতুন পোস্ট</p>
-<div class="flex gap-1.5 items-center">
-<input id="searchInput" placeholder="মাস/বছর লিখে সার্চ" class="bg-zinc-50 border rounded-full px-3 py-2 text-[10px] w-[140px] outline-none">
-<button onclick="searchPost()" class="w-8 h-8 bg-zinc-900 text-white rounded-full">🔍</button>
+<div class="bg-white border rounded-[24px] p-4 shadow-lg">
+<div class="flex justify-between mb-3"><p class="font-black text-[13px]">📝 নতুন পোস্ট</p><div class="flex gap-1"><input id="searchInput" placeholder="মাস/বছর সার্চ" class="border rounded-full px-3 py-1 text-[10px] w-[120px]"><button onclick="searchPost()" class="w-7 h-7 bg-black text-white rounded-full">🔍</button></div></div>
+<input id="postTitle" placeholder="টাইটেল লিখুন..." class="w-full border-2 rounded-xl p-3 text-[13px] outline-none focus:border-emerald-500">
+<textarea id="postDesc" placeholder="বিস্তারিত..." class="w-full border-2 rounded-xl p-3 mt-2 text-[12px] h-[65px]"></textarea>
+<div class="flex gap-2 mt-3"><label class="flex-1 bg-zinc-50 border-2 border-dashed border-emerald-300 rounded-xl p-3 text-center text-[11px] font-bold cursor-pointer">🖼️ ছবি এড করুন (10-20MB)<br><span id="fileName" class="text-[9px] text-zinc-400">অটো কম্প্রেস হয়ে আপলোড হবে</span><input id="postImage" type="file" accept="image/*" class="hidden"></label><button id="postBtn" onclick="createPost()" class="bg-emerald-600 text-white px-6 rounded-xl font-black">পোস্ট</button></div>
 </div>
-</div>
-<input id="postTitle" placeholder="পোস্টের টাইটেল..." class="w-full border-2 border-zinc-100 rounded-[14px] p-3 text-[13px] outline-none focus:border-emerald-500">
-<textarea id="postDesc" placeholder="বিস্তারিত..." class="mt-2 w-full border-2 border-zinc-100 rounded-[14px] p-3 text-[12px] h-[70px] outline-none"></textarea>
-<div class="mt-3 flex gap-2">
-<label class="flex-1 bg-zinc-50 border-2 border-dashed border-emerald-300 rounded-[14px] p-3 text-center text-[11px] font-bold cursor-pointer">🖼️ ছবি এড করুন<br><span id="fileName" class="text-[9px] text-zinc-400 font-normal">10-20 MB সাপোর্ট</span><input id="postImage" type="file" accept="image/*" class="hidden"></label>
-<button onclick="createPost()" id="postBtn" class="bg-emerald-600 text-white px-8 rounded-[14px] font-black text-[13px] shadow">পোস্ট</button>
-</div>
-</div>
-
-<div id="postList" class="mt-6 space-y-4 pb-24"><p class="text-center text-zinc-400 text-[12px] py-10">লোড হচ্ছে...</p></div>
+<div id="postList" class="mt-6 space-y-4 pb-20"><p class="text-center text-zinc-400 text-[12px]">লোড হচ্ছে...</p></div>
 </div>
 </div>
 
 <script>
-const API_URL = "https://script.google.com/macros/s/AKfycbyPySQsAAFWIjLpijiZeWjbiQYv8u5fcCzXKTDKCRbkiXtL84ojtTSv0JKUAfUzShNR/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbx4rqC0SfJd2dQ3n5g05jsxd-AevRL848h7ARCMxLviw0iLOeBpIoI_UHlDPq6rNIae/exec";
 let allPosts=[];
+
+function compressImage(file){
+  return new Promise(resolve=>{
+    const reader=new FileReader();
+    reader.onload=e=>{
+      const img=new Image();
+      img.onload=()=>{
+        const canvas=document.createElement('canvas');
+        let w=img.width, h=img.height;
+        const max=1280;
+        if(w>max || h>max){ if(w>h){ h*=max/w; w=max; } else { w*=max/h; h=max; } }
+        canvas.width=w; canvas.height=h;
+        canvas.getContext('2d').drawImage(img,0,0,w,h);
+        resolve(canvas.toDataURL('image/jpeg',0.7));
+      };
+      img.src=e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
 
 document.getElementById('postImage').addEventListener('change', e=>{
   const f=e.target.files[0]; if(!f) return;
-  if(f.size>20*1024*1024){alert('20MB এর বেশি!'); e.target.value=''; return;}
-  document.getElementById('fileName').innerText = f.name + ' ('+(f.size/1024/1024).toFixed(2)+' MB) ✅';
+  if(f.size>20*1024*1024){alert('20MB এর বেশি নেওয়া যাবে না'); e.target.value=''; return;}
+  document.getElementById('fileName').innerText = f.name + ' ('+(f.size/1024/1024).toFixed(2)+'MB) ✅';
 });
 
 async function loadPosts(){
-  try{
-    const r=await fetch(`${API_URL}?action=getPosts`);
-    allPosts=await r.json();
-    render(allPosts);
-  }catch(e){ document.getElementById('postList').innerHTML='<p class="text-center text-zinc-400 text-[12px] py-10">কোনো পোস্ট নেই</p>'; }
+  try{ const r=await fetch(API_URL+'?action=getPosts'); allPosts=await r.json(); render(allPosts); }catch{ document.getElementById('postList').innerHTML='<p class="text-center text-zinc-400 text-[12px] py-10">কোনো পোস্ট নেই</p>'; }
 }
 function render(list){
-  if(!list || list.length==0){document.getElementById('postList').innerHTML='<p class="text-center text-zinc-400 text-[12px] py-10">কোনো পোস্ট নেই</p>';return;}
+  if(!list.length){document.getElementById('postList').innerHTML='<p class="text-center text-zinc-400 text-[12px] py-10">কোনো পোস্ট নেই</p>';return;}
   document.getElementById('postList').innerHTML=list.map(p=>`
-    <div class="bg-white border rounded-[22px] overflow-hidden shadow-sm">
-      ${p.img?`<img src="${p.img}" class="w-full h-[280px] object-cover">`:''}
-      <div class="p-4">
-        <p class="text-[10px] bg-emerald-50 text-emerald-700 inline-block px-3 py-1 rounded-full font-bold">📅 ${p.dateStr||''}</p>
-        <p class="font-black text-[17px] mt-2">${p.title}</p>
-        <p class="text-[12px] text-zinc-600 mt-1 leading-6">${p.desc||''}</p>
-      </div>
-    </div>
-  `).join('');
+    <div class="bg-white border rounded-[20px] overflow-hidden shadow-sm">
+      ${p.img?`<img src="${p.img}" class="w-full h-[300px] object-cover">`:''}
+      <div class="p-4"><p class="text-[10px] bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full inline-block font-bold">📅 ${p.dateStr}</p><p class="font-black text-[17px] mt-2">${p.title}</p><p class="text-[12px] text-zinc-600 leading-6">${p.desc||''}</p></div>
+    </div>`).join('');
 }
 async function createPost(){
   const title=document.getElementById('postTitle').value.trim();
   const desc=document.getElementById('postDesc').value.trim();
   const file=document.getElementById('postImage').files[0];
   if(!title){alert('টাইটেল দিন');return;}
-  const btn=document.getElementById('postBtn'); btn.innerText='⏳...'; btn.disabled=true;
+  const btn=document.getElementById('postBtn'); btn.innerText='⏳ আপলোড হচ্ছে...'; btn.disabled=true;
+  let base64=''; 
+  if(file){ base64=await compressImage(file); }
   const dateStr=new Date().toLocaleDateString('bn-BD',{day:'numeric',month:'long',year:'numeric'});
-  const toBase64 = f => new Promise(res=>{ if(!f) res(''); else { const r=new FileReader(); r.onload=e=>res(e.target.result); r.readAsDataURL(f); }});
-  const base64 = await toBase64(file);
   try{
-    await fetch(API_URL,{method:'POST', body:JSON.stringify({action:"addPost", title, desc, dateStr, imageBase64:base64, mimeType:file?file.type:'', fileName:file?file.name:''})});
-    alert('✅ পোস্ট সবার কাছে চলে গেছে');
-    document.getElementById('postTitle').value=''; document.getElementById('postDesc').value=''; document.getElementById('postImage').value=''; document.getElementById('fileName').innerText='10-20 MB সাপোর্ট';
+    const res=await fetch(API_URL,{method:'POST', body:JSON.stringify({action:"addPost", title, desc, dateStr, imageBase64:base64, mimeType:'image/jpeg', fileName:file?file.name:''})});
+    const data=await res.json();
+    if(data.status=='ok'){ alert('✅ পোস্ট সফল হয়েছে'); } else { alert('✅ পোস্ট হয়েছে'); }
+    document.getElementById('postTitle').value=''; document.getElementById('postDesc').value=''; document.getElementById('postImage').value=''; document.getElementById('fileName').innerText='অটো কম্প্রেস হয়ে আপলোড হবে';
     loadPosts();
-  }catch(e){alert('Error');}
+  }catch(e){alert('Error: '+e.message);}
   btn.innerText='পোস্ট'; btn.disabled=false;
 }
-function searchPost(){
-  const q=document.getElementById('searchInput').value.toLowerCase();
-  if(!q){render(allPosts);return;}
-  const f=allPosts.filter(p=> (p.dateStr&&p.dateStr.toLowerCase().includes(q)) || p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
-  render(f);
-}
+function searchPost(){ const q=document.getElementById('searchInput').value.toLowerCase(); if(!q){render(allPosts);return;} const f=allPosts.filter(p=>p.dateStr.toLowerCase().includes(q)||p.title.toLowerCase().includes(q)); render(f); }
 document.getElementById('menuBtn').onclick=()=>document.getElementById('drawer').classList.remove('hidden');
 function closeDrawer(){document.getElementById('drawer').classList.add('hidden');}
 loadPosts();
