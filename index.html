@@ -19,15 +19,12 @@
 <button id="adminBtn" onclick="openPin()" class="px-4 py-2 rounded-full bg-black text-white text-[12px] font-bold">🔐 এডমিন</button>
 </header>
 
-<!-- TABS -->
 <div class="p-3 grid grid-cols-2 gap-2">
 <button onclick="setTab('weekly')" id="t-weekly" class="p-3 rounded-xl font-black bg-emerald-700 text-white">📅 সাপ্তাহিক মিলাদ</button>
 <button onclick="setTab('islamic')" id="t-islamic" class="p-3 rounded-xl font-black bg-zinc-100">🕌 ইসলামিক অনুষ্ঠান</button>
 </div>
 
-<!-- WEEKLY SYSTEM -->
 <div id="tab-weekly">
-<!-- ADD MEMBER -->
 <div class="p-4 bg-emerald-50/70 border-y">
 <div class="font-black text-[13px] mb-2">নতুন সদস্য যোগ করুন</div>
 <div class="grid grid-cols-2 gap-2">
@@ -35,12 +32,10 @@
 <input id="newPorichoy" placeholder="সদস্যের পরিচয়" class="border-2 rounded-xl p-3 text-[13px]">
 </div>
 <button onclick="addMember()" class="w-full mt-2 bg-black text-white p-3 rounded-xl font-black text-[13px]">💾 সেভ করুন (A=নাম B=পরিচয় ফিক্সড)</button>
-<p class="text-[10px] text-zinc-500 mt-2">A কলাম=নাম, B=পরিচয় ফিক্সড থাকবে। C=টাকা D=দাতা প্রতি বুধবার অটো ০ হবে</p>
 </div>
 
-<!-- CURRENT SHEET (HTML ভিতরের শিট) -->
 <div class="p-3">
-<div class="flex justify-between items-center mb-2"><b class="text-[13px]">এই সপ্তাহের শিট (C,D লিখুন)</b><span class="text-[10px] bg-yellow-100 px-2 py-1 rounded-full">বুধবার অটো জিরো</span></div>
+<div class="flex justify-between items-center mb-2"><b class="text-[13px]">এই সপ্তাহের শিট (C,D লিখুন)</b><span class="text-[10px] bg-yellow-100 px-2 py-1 rounded-full">বুধবার অটো ০</span></div>
 <div id="currentSheet" class="space-y-2"></div>
 <div class="mt-3 border-2 border-dashed rounded-xl p-3">
 <div class="font-bold text-[12px]">এই সপ্তাহের খরচ</div>
@@ -56,14 +51,12 @@
 <button onclick="saveWeeklyFinal()" class="w-full mt-3 bg-emerald-600 text-white p-4 rounded-xl font-black">✅ এই শিট সেভ করুন (তারিখ সহ সংরক্ষণ)</button>
 </div>
 
-<!-- SEARCH + HISTORY -->
 <div class="p-3 border-t mt-4">
-<div class="flex gap-2"><input id="searchWeekly" placeholder="মাস/সাল লিখে সার্চ (2026-09 / 2026)" class="flex-1 border-2 rounded-full px-4 py-3 text-[13px] font-bold"><button onclick="searchWeekly()" class="px-5 bg-black text-white rounded-full font-bold text-[12px]">সার্চ</button></div>
+<div class="flex gap-2"><input id="searchWeekly" placeholder="মাস/সাল লিখে সার্চ (2026-09)" class="flex-1 border-2 rounded-full px-4 py-3 text-[13px] font-bold"><button onclick="searchWeekly()" class="px-5 bg-black text-white rounded-full font-bold text-[12px]">সার্চ</button></div>
 <div id="weeklyHistory" class="mt-4 space-y-3"></div>
 </div>
 </div>
 
-<!-- ISLAMIC SYSTEM -->
 <div id="tab-islamic" class="hidden">
 <div class="p-4 bg-amber-50 border-y">
 <div class="font-black text-[13px]">আয়োজিত অনুষ্ঠানটির নাম</div>
@@ -82,14 +75,11 @@
 <div id="islamicHistory" class="p-3 space-y-3"></div>
 </div>
 
-<!-- FUND VIEW -->
 <div class="p-4 border-t bg-zinc-50"><b class="text-[12px]">🏦 সংগঠন ফান্ড (অটো +/-)</b><div id="fundView" class="mt-2 text-[12px]"></div></div>
 </div>
 
-<!-- PIN MODAL -->
 <div id="pinModal" class="hidden fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4"><div class="bg-white rounded-2xl p-5 w-full max-w-sm"><div class="font-black text-lg">নিরাপদ প্রবেশ</div><input id="pinInput" type="password" class="border-2 rounded-xl p-3 w-full mt-3" placeholder="PIN (PM)"><div class="flex gap-2 mt-3"><button onclick="closePin()" class="border rounded-xl p-3 flex-1 font-bold">বন্ধ</button><button onclick="login()" class="bg-emerald-700 text-white rounded-xl p-3 flex-1 font-black">প্রবেশ</button></div><div id="pinError" class="text-rose-600 text-[12px] mt-2"></div></div></div>
 
-<!-- HIDDEN POSTER FOR SHARE -->
 <div id="poster" class="hidden fixed left-[-99999px] top-0 poster-box">
 <div class="flex items-center gap-3 border-b-4 border-emerald-700 pb-3"><img src="https://i.ibb.co/3mQ0XzK/logo.png" class="w-16 h-16 rounded-full"><div><div class="font-black text-[18px]">লতিফিয়া সংগঠন মীরের গাঁও</div><div id="pWeek" class="text-[12px] font-bold"></div></div></div>
 <div id="pBody" class="mt-4"></div>
@@ -105,8 +95,9 @@ function openPin(){ document.getElementById('pinModal').classList.remove('hidden
 function closePin(){ document.getElementById('pinModal').classList.add('hidden'); document.getElementById('pinModal').classList.remove('flex'); }
 async function login(){
   const p=document.getElementById('pinInput').value.trim(); if(!p) return;
-  const r=await fetch(API,{method:'POST', body: JSON.stringify({action:'test', pin:p})}); const j=await r.json().catch(()=>({}));
-  if(j.status==='wrong_pin'){ document.getElementById('pinError').innerText='❌ ভুল PIN'; return; }
+  const r=await fetch(API,{method:'POST', body: JSON.stringify({action:'test', pin:p})});
+  const j=await r.json().catch(()=>({}));
+  if(j.status==='wrong_pin'){ document.getElementById('pinError').innerText='❌ ভুল PIN - Script Properties এ ADMIN_PIN=PM দিন'; return; }
   PIN=p; IS_ADMIN=true; document.getElementById('adminBtn').innerText='✅ এডমিন'; document.getElementById('adminBtn').className='px-4 py-2 rounded-full bg-emerald-600 text-white text-[12px] font-bold'; closePin(); loadAll();
 }
 function setTab(t){
@@ -116,32 +107,39 @@ function setTab(t){
   document.getElementById('t-islamic').className = t==='islamic' ? 'p-3 rounded-xl font-black bg-emerald-700 text-white' : 'p-3 rounded-xl font-black bg-zinc-100';
 }
 async function loadAll(){ await loadCurrent(); await loadHistory(); await loadFund(); await loadIslamicHistory(); }
+
 async function addMember(){
   if(!IS_ADMIN) return openPin();
-  const name=document.getElementById('newName').value.trim(); const porichoy=document.getElementById('newPorichoy').value.trim();
+  const name=document.getElementById('newName').value.trim();
+  const porichoy=document.getElementById('newPorichoy').value.trim();
   if(!name) return alert('নাম দিন');
-  await fetch(API,{method:'POST', body: JSON.stringify({action:'addMember', name, porichoy, pin:PIN})});
-  document.getElementById('newName').value=''; document.getElementById('newPorichoy').value=''; loadCurrent();
+  const r = await fetch(API,{method:'POST', body: JSON.stringify({action:'addMember', name, porichoy, pin:PIN})});
+  const j = await r.json();
+  if(j.status=='ok'){
+    document.getElementById('newName').value=''; document.getElementById('newPorichoy').value='';
+    loadCurrent();
+    alert('✅ সদস্য যোগ হয়েছে: A='+name+' B='+porichoy);
+  } else {
+    alert('❌ Error: '+JSON.stringify(j)+' — Apps Script এ setupAll Run করেছেন কিনা দেখুন');
+  }
 }
 async function loadCurrent(){
   const r=await fetch(API+'?action=getCurrent'); const vals=await r.json();
   const container=document.getElementById('currentSheet'); container.innerHTML='';
-  let total=0;
+  if(vals.length<=1){ container.innerHTML='<div class="text-[12px] text-zinc-400 text-center py-6">কোনো সদস্য নেই — ওপরে নাম লিখে সেভ করুন</div>'; return; }
   vals.slice(1).forEach(row=>{
     const name=row[0], porichoy=row[1], taka=row[2]||'', data=row[3]||'';
-    total+=Number(taka||0);
     const div=document.createElement('div'); div.className='member-card';
     div.innerHTML=`<div class="flex justify-between"><div><div class="font-black text-[13px]">${name}</div><div class="text-[11px] text-zinc-500">B: ${porichoy||'-'}</div></div><div class="text-[10px] bg-zinc-100 px-2 py-1 rounded-full">A: ${name}</div></div>
-    <div class="grid grid-cols-2 gap-2 mt-3"><div><div class="text-[10px] font-bold">C: টাকা (বুধবার ০)</div><input ${IS_ADMIN?'':'disabled'} data-name="${name}" data-field="taka" value="${taka}" placeholder="0" class="w-full border rounded-xl p-2.5 text-[13px] font-bold"></div><div><div class="text-[10px] font-bold">D: দাতা</div><input ${IS_ADMIN?'':'disabled'} data-name="${name}" data-field="data" value="${data}" placeholder="দাতা" class="w-full border rounded-xl p-2.5 text-[12px]"></div></div>`;
+    <div class="grid grid-cols-2 gap-2 mt-3"><div><div class="text-[10px] font-bold">C: টাকা</div><input data-name="${name}" data-field="taka" value="${taka}" placeholder="0" class="w-full border rounded-xl p-2.5 text-[13px] font-bold"></div><div><div class="text-[10px] font-bold">D: দাতা</div><input data-name="${name}" data-field="data" value="${data}" placeholder="দাতা" class="w-full border rounded-xl p-2.5 text-[12px]"></div></div>`;
     container.appendChild(div);
   });
-  document.getElementById('totalCollection').innerText = total+'৳'; calcRemain();
+  calcRemain();
 }
 function addExpToList(){
   const b=document.getElementById('expBiboron').value; const t=document.getElementById('expTaka').value;
   if(!b||!t) return alert('বিবরণ+টাকা দিন'); expenses.push({biboron:b, taka:t});
-  document.getElementById('expBiboron').value=''; document.getElementById('expTaka').value='';
-  renderExp(); calcRemain();
+  document.getElementById('expBiboron').value=''; document.getElementById('expTaka').value=''; renderExp(); calcRemain();
 }
 function renderExp(){
   document.getElementById('expList').innerHTML = expenses.map((e,i)=>`<div class="flex justify-between border-b py-1"><span>${e.biboron}</span><span class="font-bold">${e.taka}৳ <button onclick="expenses.splice(${i},1);renderExp();calcRemain()" class="text-red-500 ml-2">x</button></span></div>`).join('');
@@ -157,8 +155,7 @@ function calcRemain(){
 async function saveWeeklyFinal(){
   if(!IS_ADMIN) return openPin();
   const {total, expTotal}=calcRemain();
-  const items=[]; const rows=document.querySelectorAll('.member-card');
-  rows.forEach(card=>{
+  const items=[]; document.querySelectorAll('.member-card').forEach(card=>{
     const name=card.querySelector('[data-field="taka"]').dataset.name;
     const taka=card.querySelector('[data-field="taka"]').value;
     const data=card.querySelector('[data-field="data"]').value;
@@ -167,37 +164,36 @@ async function saveWeeklyFinal(){
   });
   if(!items.length) return alert('C/D তে কিছু লিখুন');
   const dateStr=new Date().toLocaleDateString('bn-BD');
-  await fetch(API,{method:'POST', body: JSON.stringify({action:'saveWeekly', weekId:WEEK_ID, dateStr, items, expenseTotal:expTotal, expenses, pin:PIN})});
-  alert(`✅ সেভ হয়েছে | মোট ${total}৳ | ফান্ডে ${total-expTotal}৳ অটো যাবে`);
-  expenses=[]; renderExp(); loadHistory(); loadFund();
+  const r=await fetch(API,{method:'POST', body: JSON.stringify({action:'saveWeekly', weekId:WEEK_ID, dateStr, items, expenseTotal:expTotal, expenses, pin:PIN})});
+  const j=await r.json();
+  if(j.status=='ok'){ alert(`✅ সেভ হয়েছে | মোট ${total}৳ | ফান্ডে ${total-expTotal}৳`); expenses=[]; renderExp(); loadHistory(); loadFund(); }
+  else alert('Error: '+JSON.stringify(j));
 }
-
 async function loadHistory(q=''){
   const r=await fetch(API+`?action=getWeeklyHistory&q=${encodeURIComponent(q)}`); const vals=await r.json();
   const container=document.getElementById('weeklyHistory'); container.innerHTML='';
   if(vals.length<=1){ container.innerHTML='<div class="text-[12px] text-zinc-400 text-center">কোনো সেভ করা শিট নেই</div>'; return; }
-  // গ্রুপ by WeekID
   const groups={}; vals.slice(1).forEach(row=>{ const wid=row[0]; if(!groups[wid]) groups[wid]=[]; groups[wid].push(row); });
   Object.keys(groups).reverse().forEach(wid=>{
     const rows=groups[wid]; const date=rows[0][1]; let total=0; rows.forEach(r=> total+=Number(r[4]||0));
     const div=document.createElement('div'); div.className='border rounded-[18px] p-3 bg-white';
-    div.innerHTML=`<div class="flex justify-between items-center"><div><div class="font-black text-[13px]">${wid}</div><div class="text-[11px] text-zinc-500">${date} | মোট: ${total}৳</div></div><div class="flex gap-2"><button onclick="shareWeekly('${wid}')" class="w-8 h-8 bg-emerald-50 rounded-full">📤</button><button onclick="editWeekly('${wid}')" class="w-8 h-8 bg-zinc-100 rounded-full">✏️</button></div></div><div class="mt-2 text-[11px] space-y-1 max-h-[120px] overflow-auto">${rows.map(r=>`<div class="flex justify-between border-b py-1"><span>${r[2]} (${r[3]})</span><span>${r[4]}৳ ${r[5]?'- '+r[5]:''}</span></div>`).join('')}</div>`;
+    div.innerHTML=`<div class="flex justify-between items-center"><div><div class="font-black text-[13px]">${wid}</div><div class="text-[11px] text-zinc-500">${date} | মোট: ${total}৳</div></div><div class="flex gap-2"><button onclick="shareWeekly('${wid}')" class="w-8 h-8 bg-emerald-50 rounded-full">📤</button></div></div><div class="mt-2 text-[11px] space-y-1 max-h-[120px] overflow-auto">${rows.map(r=>`<div class="flex justify-between border-b py-1"><span>${r[2]} (${r[3]})</span><span>${r[4]}৳ ${r[5]?'- '+r[5]:''}</span></div>`).join('')}</div>`;
     container.appendChild(div);
   });
 }
 function searchWeekly(){ const q=document.getElementById('searchWeekly').value.trim(); loadHistory(q); }
 async function shareWeekly(wid){
-  if(!IS_ADMIN) return openPin();
-  const r=await fetch(API+`?action=getWeeklyHistory&q=${wid}`); const vals=await r.json();
-  const rows=vals.filter(v=>v[0]==wid); if(!rows.length) return;
-  const poster=document.getElementById('poster'); poster.classList.remove('hidden'); poster.style.position='fixed';
-  document.getElementById('pWeek').innerText = wid + ' | ' + rows[0][1];
-  let total=0; let body=`<table class="w-full text-[12px]"><tr class="bg-emerald-50"><th class="p-2 text-left">নাম</th><th>পরিচয়</th><th>টাকা</th><th>দাতা</th></tr>`;
-  rows.forEach(r=>{ total+=Number(r[4]||0); body+=`<tr class="border-b"><td class="p-2 font-bold">${r[2]}</td><td class="p-2">${r[3]}</td><td class="p-2 font-bold">${r[4]}</td><td class="p-2">${r[5]}</td></tr>`; }); body+=`</table>`;
+  const r=await fetch(API+`?action=getWeeklyHistory`); const vals=await r.json();
+  const rows=vals.filter(v=>v[0]==wid || v[0]==wid); // filter
+  const all = vals.slice(1).filter(v=>v[0]==wid);
+  if(!all.length) return;
+  const poster=document.getElementById('poster'); poster.classList.remove('hidden');
+  document.getElementById('pWeek').innerText = wid + ' | ' + all[0][1];
+  let total=0; let body=`<table class="w-full text-[12px]"><tr class="bg-emerald-50"><th class="p-2 text-left">নাম</th><th>টাকা</th><th>দাতা</th></tr>`;
+  all.forEach(r=>{ total+=Number(r[4]||0); body+=`<tr class="border-b"><td class="p-2 font-bold">${r[2]}</td><td class="p-2 font-bold">${r[4]}</td><td class="p-2">${r[5]}</td></tr>`; }); body+=`</table>`;
   document.getElementById('pBody').innerHTML=body; document.getElementById('pTotal').innerText=`মোট কালেকশন: ${total}৳`;
   const canvas=await html2canvas(document.getElementById('poster'),{scale:2}); const a=document.createElement('a'); a.download=`${wid}.png`; a.href=canvas.toDataURL(); a.click(); poster.classList.add('hidden');
 }
-function editWeekly(wid){ alert('এডিট: '+wid+' এর তথ্য আবার Current শিটে লোড হবে - এডমিন প্যানেল থেকে C/D এডিট করুন'); WEEK_ID=wid; document.getElementById('weekLabel').innerText=wid+' (এডিট মোড)'; window.scrollTo(0,0); }
 
 let islamicDraft=[]; let currentEventId='EV-'+Date.now(); let currentEventName='';
 function addIslamicDraft(){
@@ -213,14 +209,19 @@ function renderIslamicDraft(){
 }
 async function finalIslamicSave(){
   if(!IS_ADMIN) return openPin();
-  if(!currentEventName) return alert('অনুষ্ঠানের নাম দিন'); if(!islamicDraft.length) return alert('অন্তত একজন যোগ করুন');
-  const dateStr=new Date().toLocaleDateString('bn-BD'); const exp=document.getElementById('islExp').value||0;
-  for(let d of islamicDraft){
-    await fetch(API,{method:'POST', body: JSON.stringify({action:'addIslamicDraft', eventId: currentEventId, eventName: currentEventName, dateStr, name:d.name, porichoy:d.porichoy, taka:d.taka, data:d.data, pin:PIN})});
+  if(!currentEventName) currentEventName = document.getElementById('eventName').value.trim();
+  if(!currentEventName) return alert('অনুষ্ঠানের নাম দিন');
+  if(!islamicDraft.length) return alert('অন্তত একজন যোগ করুন');
+  const dateStr=new Date().toLocaleDateString('bn-BD');
+  const exp=document.getElementById('islExp').value||0;
+  const res = await fetch(API,{method:'POST', body: JSON.stringify({action:'saveIslamicFinal', eventId: currentEventId, eventName: currentEventName, dateStr, items: islamicDraft, expenseTotal: exp, pin: PIN})});
+  const j = await res.json();
+  if(j.status=='ok'){
+    alert('✅ ইসলামিক শিট সেভ হয়েছে, ওপর ক্লিয়ার হলো, নিচে চলে গেছে');
+    islamicDraft=[]; currentEventId='EV-'+Date.now(); currentEventName=''; document.getElementById('eventName').value=''; document.getElementById('islExp').value=''; renderIslamicDraft(); loadIslamicHistory(); loadFund();
+  } else {
+    alert('❌ Error: '+JSON.stringify(j));
   }
-  await fetch(API,{method:'POST', body: JSON.stringify({action:'finalIslamic', eventId: currentEventId, dateStr, eventName: currentEventName, expenseTotal:exp, pin:PIN})});
-  alert('✅ ইসলামিক শিট সেভ হয়েছে, ওপর ক্লিয়ার হলো, নিচে চলে গেছে');
-  islamicDraft=[]; currentEventId='EV-'+Date.now(); currentEventName=''; document.getElementById('eventName').value=''; document.getElementById('islExp').value=''; renderIslamicDraft(); loadIslamicHistory(); loadFund();
 }
 async function loadIslamicHistory(){
   const r=await fetch(API+'?action=getIslamicHistory'); const vals=await r.json();
@@ -230,27 +231,16 @@ async function loadIslamicHistory(){
   Object.keys(groups).reverse().forEach(eid=>{
     const rows=groups[eid]; const evName=rows[0][1]; const date=rows[0][2]; let total=0; rows.forEach(r=> total+=Number(r[5]||0));
     const div=document.createElement('div'); div.className='border rounded-[18px] p-3 bg-white';
-    div.innerHTML=`<div class="flex justify-between"><div><div class="font-black text-[13px]">${evName}</div><div class="text-[11px] text-zinc-500">${date} | মোট ${total}৳ | ${rows[0][7]}</div></div><div class="flex gap-2"><button onclick="shareIslamic('${eid}')" class="w-8 h-8 bg-emerald-50 rounded-full">📤</button></div></div><div class="mt-2 text-[11px]">${rows.map(r=>`<div class="flex justify-between border-b py-1"><span>${r[3]} ${r[4]? '('+r[4]+')':''}</span><span>${r[5]}৳ ${r[6]||''}</span></div>`).join('')}</div>`;
+    div.innerHTML=`<div class="flex justify-between"><div><div class="font-black text-[13px]">${evName}</div><div class="text-[11px] text-zinc-500">${date} | মোট ${total}৳</div></div></div><div class="mt-2 text-[11px]">${rows.map(r=>`<div class="flex justify-between border-b py-1"><span>${r[3]} ${r[4]? '('+r[4]+')':''}</span><span>${r[5]}৳ ${r[6]||''}</span></div>`).join('')}</div>`;
     c.appendChild(div);
   });
-}
-async function shareIslamic(eid){
-  const r=await fetch(API+`?action=getIslamicHistory`); const vals=await r.json(); const rows=vals.filter(v=>v[0]==eid);
-  const poster=document.getElementById('poster'); poster.classList.remove('hidden');
-  document.getElementById('pWeek').innerText = rows[0][1]; let total=0; let body=`<table class="w-full text-[12px]"><tr class="bg-amber-50"><th class="p-2 text-left">নাম</th><th>টাকা</th></tr>`;
-  rows.forEach(r=>{ total+=Number(r[5]||0); body+=`<tr class="border-b"><td class="p-2">${r[3]} ${r[4]? '('+r[4]+')':''}</td><td class="p-2 font-bold">${r[5]}৳</td></tr>`; }); body+=`</table>`;
-  document.getElementById('pBody').innerHTML=body; document.getElementById('pTotal').innerText=`মোট: ${total}৳`;
-  const canvas=await html2canvas(poster,{scale:2}); const a=document.createElement('a'); a.download=`${eid}.png`; a.href=canvas.toDataURL(); a.click(); poster.classList.add('hidden');
 }
 async function loadFund(){
   const r=await fetch(API+'?action=getFund'); const vals=await r.json();
   let total=0; vals.slice(1).forEach(row=>{ const t=Number(row[3]||0); if(row[4]=='IN') total+=t; else total-=t; });
   const c=document.getElementById('fundView'); c.innerHTML=`<div class="font-black text-[18px] mb-2">বর্তমান ফান্ড: ${total}৳</div>`+vals.slice(1).reverse().slice(0,20).map(row=>`<div class="flex justify-between border-b py-1"><span>${row[0]} ${row[2]}</span><span class="${row[4]=='IN'?'text-emerald-600':'text-red-600'} font-bold">${row[4]=='IN'?'+': '-'}${row[3]}৳</span></div>`).join('');
 }
-
-// init
 loadAll();
-// logo triple tap secret admin
 let taps=0; document.getElementById('brandLogo').addEventListener('click',()=>{ taps++; if(taps>=3){ openPin(); taps=0; } setTimeout(()=>taps=0,1500); });
 </script>
 </body></html>
