@@ -33,7 +33,6 @@
 </div>
 <button onclick="addMember()" class="w-full mt-2 bg-black text-white p-3 rounded-xl font-black text-[13px]">💾 সেভ করুন (A=নাম B=পরিচয় ফিক্সড)</button>
 </div>
-
 <div class="p-3">
 <div class="flex justify-between items-center mb-2"><b class="text-[13px]">এই সপ্তাহের শিট (C,D লিখুন)</b><span class="text-[10px] bg-yellow-100 px-2 py-1 rounded-full">বুধবার অটো ০</span></div>
 <div id="currentSheet" class="space-y-2"></div>
@@ -50,7 +49,6 @@
 </div>
 <button onclick="saveWeeklyFinal()" class="w-full mt-3 bg-emerald-600 text-white p-4 rounded-xl font-black">✅ এই শিট সেভ করুন (তারিখ সহ সংরক্ষণ)</button>
 </div>
-
 <div class="p-3 border-t mt-4">
 <div class="flex gap-2"><input id="searchWeekly" placeholder="মাস/সাল লিখে সার্চ (2026-09)" class="flex-1 border-2 rounded-full px-4 py-3 text-[13px] font-bold"><button onclick="searchWeekly()" class="px-5 bg-black text-white rounded-full font-bold text-[12px]">সার্চ</button></div>
 <div id="weeklyHistory" class="mt-4 space-y-3"></div>
@@ -59,7 +57,7 @@
 
 <div id="tab-islamic" class="hidden">
 <div class="p-4 bg-amber-50 border-y">
-<div class="font-black text-[13px]">আয়োজিত অনুষ্ঠানটির নাম</div>
+<div class="font-black text-[13px]">আয়োজিত অনুষ্ঠানটির নাম *</div>
 <input id="eventName" placeholder="যেমন: ঈদে মিলাদুন্নবী মাহফিল" class="w-full border-2 rounded-xl p-3 mt-2 text-[13px] font-bold">
 <div class="mt-4 font-bold text-[12px]">সহযোগিতা ফর্ম (খালি থাকলেও সেভ হবে)</div>
 <div class="grid grid-cols-2 gap-2 mt-2">
@@ -68,9 +66,9 @@
 <input id="islTaka" type="number" placeholder="টাকার পরিমাণ" class="border rounded-xl p-3 text-[12px] font-bold">
 <input id="islData" placeholder="দাতা" class="border rounded-xl p-3 text-[12px]">
 </div>
-<button onclick="addIslamicDraft()" class="w-full mt-2 bg-black text-white p-3 rounded-xl font-black text-[12px]">➕ এই অনুষ্ঠানে এড করুন</button>
-<div id="islamicDraftList" class="mt-3 text-[12px]"></div>
-<div class="mt-3 grid grid-cols-2 gap-2"><input id="islExp" type="number" placeholder="অনুষ্ঠান খরচ" class="border rounded-xl p-3 text-[12px]"><button onclick="finalIslamicSave()" class="bg-emerald-600 text-white p-3 rounded-xl font-black text-[12px]">✅ ফাইনাল সেভ (নিচে যাবে, ওপর ক্লিয়ার)</button></div>
+<button onclick="addIslamicDraft()" class="w-full mt-2 bg-black text-white p-3 rounded-xl font-black text-[12px]">➕ এই অনুষ্ঠানে এড করুন (লিস্টে জমা হবে)</button>
+<div id="islamicDraftList" class="mt-3 text-[12px] bg-white rounded-xl p-3 border"></div>
+<div class="mt-3 grid grid-cols-2 gap-2"><input id="islExp" type="number" placeholder="অনুষ্ঠান খরচ" class="border rounded-xl p-3 text-[12px]"><button onclick="finalIslamicSave()" id="finalBtn" class="bg-emerald-600 text-white p-3 rounded-xl font-black text-[12px]">✅ ফাইনাল সেভ (Google Sheet এ যাবে)</button></div>
 </div>
 <div id="islamicHistory" class="p-3 space-y-3"></div>
 </div>
@@ -97,7 +95,7 @@ async function login(){
   const p=document.getElementById('pinInput').value.trim(); if(!p) return;
   const r=await fetch(API,{method:'POST', body: JSON.stringify({action:'test', pin:p})});
   const j=await r.json().catch(()=>({}));
-  if(j.status==='wrong_pin'){ document.getElementById('pinError').innerText='❌ ভুল PIN - Script Properties এ ADMIN_PIN=PM দিন'; return; }
+  if(j.status==='wrong_pin'){ document.getElementById('pinError').innerText='❌ ভুল PIN'; return; }
   PIN=p; IS_ADMIN=true; document.getElementById('adminBtn').innerText='✅ এডমিন'; document.getElementById('adminBtn').className='px-4 py-2 rounded-full bg-emerald-600 text-white text-[12px] font-bold'; closePin(); loadAll();
 }
 function setTab(t){
@@ -107,7 +105,6 @@ function setTab(t){
   document.getElementById('t-islamic').className = t==='islamic' ? 'p-3 rounded-xl font-black bg-emerald-700 text-white' : 'p-3 rounded-xl font-black bg-zinc-100';
 }
 async function loadAll(){ await loadCurrent(); await loadHistory(); await loadFund(); await loadIslamicHistory(); }
-
 async function addMember(){
   if(!IS_ADMIN) return openPin();
   const name=document.getElementById('newName').value.trim();
@@ -115,18 +112,13 @@ async function addMember(){
   if(!name) return alert('নাম দিন');
   const r = await fetch(API,{method:'POST', body: JSON.stringify({action:'addMember', name, porichoy, pin:PIN})});
   const j = await r.json();
-  if(j.status=='ok'){
-    document.getElementById('newName').value=''; document.getElementById('newPorichoy').value='';
-    loadCurrent();
-    alert('✅ সদস্য যোগ হয়েছে: A='+name+' B='+porichoy);
-  } else {
-    alert('❌ Error: '+JSON.stringify(j)+' — Apps Script এ setupAll Run করেছেন কিনা দেখুন');
-  }
+  if(j.status=='ok'){ document.getElementById('newName').value=''; document.getElementById('newPorichoy').value=''; loadCurrent(); alert('✅ সদস্য যোগ হয়েছে'); }
+  else alert('❌ Error: '+JSON.stringify(j));
 }
 async function loadCurrent(){
   const r=await fetch(API+'?action=getCurrent'); const vals=await r.json();
   const container=document.getElementById('currentSheet'); container.innerHTML='';
-  if(vals.length<=1){ container.innerHTML='<div class="text-[12px] text-zinc-400 text-center py-6">কোনো সদস্য নেই — ওপরে নাম লিখে সেভ করুন</div>'; return; }
+  if(vals.length<=1){ container.innerHTML='<div class="text-[12px] text-zinc-400 text-center py-6">কোনো সদস্য নেই</div>'; return; }
   vals.slice(1).forEach(row=>{
     const name=row[0], porichoy=row[1], taka=row[2]||'', data=row[3]||'';
     const div=document.createElement('div'); div.className='member-card';
@@ -166,72 +158,83 @@ async function saveWeeklyFinal(){
   const dateStr=new Date().toLocaleDateString('bn-BD');
   const r=await fetch(API,{method:'POST', body: JSON.stringify({action:'saveWeekly', weekId:WEEK_ID, dateStr, items, expenseTotal:expTotal, expenses, pin:PIN})});
   const j=await r.json();
-  if(j.status=='ok'){ alert(`✅ সেভ হয়েছে | মোট ${total}৳ | ফান্ডে ${total-expTotal}৳`); expenses=[]; renderExp(); loadHistory(); loadFund(); }
+  if(j.status=='ok'){ alert(`✅ সেভ হয়েছে`); expenses=[]; renderExp(); loadHistory(); loadFund(); }
   else alert('Error: '+JSON.stringify(j));
 }
 async function loadHistory(q=''){
-  const r=await fetch(API+`?action=getWeeklyHistory&q=${encodeURIComponent(q)}`); const vals=await r.json();
+  const r=await fetch(API+`?action=getWeeklyHistory`); const vals=await r.json();
   const container=document.getElementById('weeklyHistory'); container.innerHTML='';
   if(vals.length<=1){ container.innerHTML='<div class="text-[12px] text-zinc-400 text-center">কোনো সেভ করা শিট নেই</div>'; return; }
   const groups={}; vals.slice(1).forEach(row=>{ const wid=row[0]; if(!groups[wid]) groups[wid]=[]; groups[wid].push(row); });
   Object.keys(groups).reverse().forEach(wid=>{
     const rows=groups[wid]; const date=rows[0][1]; let total=0; rows.forEach(r=> total+=Number(r[4]||0));
     const div=document.createElement('div'); div.className='border rounded-[18px] p-3 bg-white';
-    div.innerHTML=`<div class="flex justify-between items-center"><div><div class="font-black text-[13px]">${wid}</div><div class="text-[11px] text-zinc-500">${date} | মোট: ${total}৳</div></div><div class="flex gap-2"><button onclick="shareWeekly('${wid}')" class="w-8 h-8 bg-emerald-50 rounded-full">📤</button></div></div><div class="mt-2 text-[11px] space-y-1 max-h-[120px] overflow-auto">${rows.map(r=>`<div class="flex justify-between border-b py-1"><span>${r[2]} (${r[3]})</span><span>${r[4]}৳ ${r[5]?'- '+r[5]:''}</span></div>`).join('')}</div>`;
+    div.innerHTML=`<div class="flex justify-between items-center"><div><div class="font-black text-[13px]">${wid}</div><div class="text-[11px] text-zinc-500">${date} | মোট: ${total}৳</div></div><div class="flex gap-2"><button onclick="shareWeekly('${wid}')" class="w-8 h-8 bg-emerald-50 rounded-full">📤</button></div></div>`;
     container.appendChild(div);
   });
 }
-function searchWeekly(){ const q=document.getElementById('searchWeekly').value.trim(); loadHistory(q); }
+function searchWeekly(){ loadHistory(document.getElementById('searchWeekly').value.trim()); }
 async function shareWeekly(wid){
   const r=await fetch(API+`?action=getWeeklyHistory`); const vals=await r.json();
-  const rows=vals.filter(v=>v[0]==wid || v[0]==wid); // filter
   const all = vals.slice(1).filter(v=>v[0]==wid);
-  if(!all.length) return;
   const poster=document.getElementById('poster'); poster.classList.remove('hidden');
   document.getElementById('pWeek').innerText = wid + ' | ' + all[0][1];
   let total=0; let body=`<table class="w-full text-[12px]"><tr class="bg-emerald-50"><th class="p-2 text-left">নাম</th><th>টাকা</th><th>দাতা</th></tr>`;
   all.forEach(r=>{ total+=Number(r[4]||0); body+=`<tr class="border-b"><td class="p-2 font-bold">${r[2]}</td><td class="p-2 font-bold">${r[4]}</td><td class="p-2">${r[5]}</td></tr>`; }); body+=`</table>`;
-  document.getElementById('pBody').innerHTML=body; document.getElementById('pTotal').innerText=`মোট কালেকশন: ${total}৳`;
+  document.getElementById('pBody').innerHTML=body; document.getElementById('pTotal').innerText=`মোট: ${total}৳`;
   const canvas=await html2canvas(document.getElementById('poster'),{scale:2}); const a=document.createElement('a'); a.download=`${wid}.png`; a.href=canvas.toDataURL(); a.click(); poster.classList.add('hidden');
 }
 
 let islamicDraft=[]; let currentEventId='EV-'+Date.now(); let currentEventName='';
 function addIslamicDraft(){
   if(!IS_ADMIN) return openPin();
-  const name=document.getElementById('islName').value; const porichoy=document.getElementById('islPorichoy').value; const taka=document.getElementById('islTaka').value; const data=document.getElementById('islData').value;
-  const eventName=document.getElementById('eventName').value.trim(); if(!eventName) return alert('অনুষ্ঠানের নাম লিখুন');
+  const name=document.getElementById('islName').value.trim();
+  const porichoy=document.getElementById('islPorichoy').value.trim();
+  const taka=document.getElementById('islTaka').value.trim();
+  const data=document.getElementById('islData').value.trim();
+  const eventName=document.getElementById('eventName').value.trim();
+  if(!eventName) return alert('অনুষ্ঠানের নাম লিখুন');
+  if(!name && !taka) return alert('অন্তত নাম বা টাকা দিন');
   currentEventName=eventName;
-  islamicDraft.push({name, porichoy, taka, data}); renderIslamicDraft();
+  islamicDraft.push({name, porichoy, taka, data});
+  renderIslamicDraft();
   document.getElementById('islName').value=''; document.getElementById('islPorichoy').value=''; document.getElementById('islTaka').value=''; document.getElementById('islData').value='';
 }
 function renderIslamicDraft(){
-  document.getElementById('islamicDraftList').innerHTML = islamicDraft.map((d,i)=>`<div class="flex justify-between border-b py-1"><span>${d.name||'-'} | ${d.porichoy||''} | ${d.taka||0}৳ | ${d.data||''}</span><button onclick="islamicDraft.splice(${i},1);renderIslamicDraft()" class="text-red-500">x</button></div>`).join('');
+  const box=document.getElementById('islamicDraftList');
+  if(!islamicDraft.length){ box.innerHTML='<div class="text-zinc-400 text-[11px]">➕ বাটনে ক্লিক করে যোগ করুন, তারপর ফাইনাল সেভ দিন</div>'; return; }
+  box.innerHTML = islamicDraft.map((d,i)=>`<div class="flex justify-between border-b py-2 text-[12px]"><span><b>${d.name||'-'}</b> ${d.porichoy? '('+d.porichoy+')':''} | ${d.taka||0}৳ ${d.data? '- '+d.data:''}</span><button onclick="islamicDraft.splice(${i},1);renderIslamicDraft()" class="text-red-500 font-bold px-2">x</button></div>`).join('')+`<div class="mt-2 text-[11px] font-bold">মোট: ${islamicDraft.length} জন, ${islamicDraft.reduce((s,e)=>s+Number(e.taka||0),0)}৳</div>`;
 }
 async function finalIslamicSave(){
   if(!IS_ADMIN) return openPin();
   if(!currentEventName) currentEventName = document.getElementById('eventName').value.trim();
   if(!currentEventName) return alert('অনুষ্ঠানের নাম দিন');
-  if(!islamicDraft.length) return alert('অন্তত একজন যোগ করুন');
+  if(!islamicDraft.length) return alert('অন্তত একজন যোগ করুন - ওপরে ➕ বাটনে ক্লিক করুন');
   const dateStr=new Date().toLocaleDateString('bn-BD');
   const exp=document.getElementById('islExp').value||0;
-  const res = await fetch(API,{method:'POST', body: JSON.stringify({action:'saveIslamicFinal', eventId: currentEventId, eventName: currentEventName, dateStr, items: islamicDraft, expenseTotal: exp, pin: PIN})});
-  const j = await res.json();
-  if(j.status=='ok'){
-    alert('✅ ইসলামিক শিট সেভ হয়েছে, ওপর ক্লিয়ার হলো, নিচে চলে গেছে');
-    islamicDraft=[]; currentEventId='EV-'+Date.now(); currentEventName=''; document.getElementById('eventName').value=''; document.getElementById('islExp').value=''; renderIslamicDraft(); loadIslamicHistory(); loadFund();
-  } else {
-    alert('❌ Error: '+JSON.stringify(j));
-  }
+  const btn=document.getElementById('finalBtn');
+  btn.innerText='⏳ সেভ হচ্ছে...'; btn.disabled=true;
+  try{
+    const res = await fetch(API,{method:'POST', body: JSON.stringify({action:'saveIslamicFinal', eventId: currentEventId, eventName: currentEventName, dateStr, items: islamicDraft, expenseTotal: exp, pin: PIN})});
+    const j = await res.json();
+    if(j.status=='ok'){
+      alert('✅ ইসলামিক শিট Google Sheet এ সেভ হয়েছে');
+      islamicDraft=[]; currentEventId='EV-'+Date.now(); currentEventName='';
+      document.getElementById('eventName').value=''; document.getElementById('islExp').value='';
+      renderIslamicDraft(); loadIslamicHistory(); loadFund();
+    } else { alert('❌ Error: '+JSON.stringify(j)); }
+  }catch(e){ alert('❌ নেটওয়ার্ক Error: '+e.message); }
+  finally{ btn.innerText='✅ ফাইনাল সেভ (Google Sheet এ যাবে)'; btn.disabled=false; }
 }
 async function loadIslamicHistory(){
   const r=await fetch(API+'?action=getIslamicHistory'); const vals=await r.json();
   const c=document.getElementById('islamicHistory'); c.innerHTML='';
-  if(vals.length<=1) return;
+  if(vals.length<=1){ c.innerHTML='<div class="text-[12px] text-zinc-400 text-center">কোনো ইসলামিক শিট নেই</div>'; return; }
   const groups={}; vals.slice(1).forEach(row=>{ const eid=row[0]; if(!groups[eid]) groups[eid]=[]; groups[eid].push(row); });
   Object.keys(groups).reverse().forEach(eid=>{
     const rows=groups[eid]; const evName=rows[0][1]; const date=rows[0][2]; let total=0; rows.forEach(r=> total+=Number(r[5]||0));
     const div=document.createElement('div'); div.className='border rounded-[18px] p-3 bg-white';
-    div.innerHTML=`<div class="flex justify-between"><div><div class="font-black text-[13px]">${evName}</div><div class="text-[11px] text-zinc-500">${date} | মোট ${total}৳</div></div></div><div class="mt-2 text-[11px]">${rows.map(r=>`<div class="flex justify-between border-b py-1"><span>${r[3]} ${r[4]? '('+r[4]+')':''}</span><span>${r[5]}৳ ${r[6]||''}</span></div>`).join('')}</div>`;
+    div.innerHTML=`<div class="flex justify-between"><div><div class="font-black text-[13px]">${evName}</div><div class="text-[11px] text-zinc-500">${date} | মোট ${total}৳ | ${rows[0][7]}</div></div></div><div class="mt-2 text-[11px]">${rows.map(r=>`<div class="flex justify-between border-b py-1"><span>${r[3]} ${r[4]? '('+r[4]+')':''}</span><span>${r[5]}৳ ${r[6]||''}</span></div>`).join('')}</div>`;
     c.appendChild(div);
   });
 }
@@ -241,6 +244,7 @@ async function loadFund(){
   const c=document.getElementById('fundView'); c.innerHTML=`<div class="font-black text-[18px] mb-2">বর্তমান ফান্ড: ${total}৳</div>`+vals.slice(1).reverse().slice(0,20).map(row=>`<div class="flex justify-between border-b py-1"><span>${row[0]} ${row[2]}</span><span class="${row[4]=='IN'?'text-emerald-600':'text-red-600'} font-bold">${row[4]=='IN'?'+': '-'}${row[3]}৳</span></div>`).join('');
 }
 loadAll();
+renderIslamicDraft();
 let taps=0; document.getElementById('brandLogo').addEventListener('click',()=>{ taps++; if(taps>=3){ openPin(); taps=0; } setTimeout(()=>taps=0,1500); });
 </script>
 </body></html>
